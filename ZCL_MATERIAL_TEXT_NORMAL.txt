@@ -1,0 +1,37 @@
+class ZCL_MATERIAL_TEXT_NORMAL definition
+  public
+  final
+  create public .
+
+public section.
+
+  methods GET_MATERIAL_TEXT
+    importing
+      !IM_MATNR type MAKT-MATNR
+      !IM_SPRAS type MAKT-SPRAS
+    exporting
+      !EX_MAKTX type MAKT-MAKTX .
+protected section.
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_MATERIAL_TEXT_NORMAL IMPLEMENTATION.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_MATERIAL_TEXT_NORMAL->GET_MATERIAL_TEXT
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] IM_MATNR                       TYPE        MAKT-MATNR
+* | [--->] IM_SPRAS                       TYPE        MAKT-SPRAS
+* | [<---] EX_MAKTX                       TYPE        MAKT-MAKTX
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  METHOD get_material_text.
+    SELECT SINGLE maktx
+             FROM makt
+             INTO ex_maktx
+            WHERE matnr = im_matnr
+              AND spras = im_spras.
+  ENDMETHOD.
+ENDCLASS.
